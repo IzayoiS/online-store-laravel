@@ -12,6 +12,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 Route::get('/details/{id}', [DetailController::class, 'index'])->name('detail');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::get('/success', [CartController::class, 'success'])->name('success');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
