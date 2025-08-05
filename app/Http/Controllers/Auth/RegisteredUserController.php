@@ -47,4 +47,9 @@ class RegisteredUserController extends Controller
 
         return redirect(route('dashboard', absolute: false));
     }
+
+    public function success(): View
+    {
+        return view('auth.success');
+    }
 }
