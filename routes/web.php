@@ -21,6 +21,7 @@ Route::get('/register/success', [RegisteredUserController::class, 'success'])->n
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/dashboard/products', [DashboardProductController::class, 'index'])->name('dashboard-product');
+Route::get('/dashboard/products/{id}', [DashboardProductController::class, 'details'])->name('dashboard-product-details');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
