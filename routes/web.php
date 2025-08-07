@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardProductController;
+use App\Http\Controllers\DashboardSettingController;
 use App\Http\Controllers\DashboardTransactionController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\HomeController;
@@ -20,7 +21,7 @@ Route::get('/success', [CartController::class, 'success'])->name('success');
 
 Route::get('/register/success', [RegisteredUserController::class, 'success'])->name('register-success');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', action: [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/dashboard/products', [DashboardProductController::class, 'index'])->name('dashboard-product');
 Route::get('/dashboard/products/create', [DashboardProductController::class, 'create'])->name('dashboard-product-create');
@@ -28,6 +29,9 @@ Route::get('/dashboard/products/{id}', [DashboardProductController::class, 'deta
 
 Route::get('/dashboard/transactions', [DashboardTransactionController::class, 'index'])->name('dashboard-transaction');
 Route::get('/dashboard/transactions/{id}', [DashboardTransactionController::class, 'details'])->name('dashboard-transaction-details');
+
+Route::get('/dashboard/settings', [DashboardSettingController::class, 'store'])->name('dashboard-settings-store');
+Route::get('/dashboard/account', [DashboardSettingController::class, 'account'])->name('dashboard-settings-account');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
