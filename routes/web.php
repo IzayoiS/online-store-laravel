@@ -27,6 +27,7 @@ Route::get('/dashboard/products/create', [DashboardProductController::class, 'cr
 Route::get('/dashboard/products/{id}', [DashboardProductController::class, 'details'])->name('dashboard-product-details');
 
 Route::get('/dashboard/transactions', [DashboardTransactionController::class, 'index'])->name('dashboard-transaction');
+Route::get('/dashboard/transactions/{id}', [DashboardTransactionController::class, 'details'])->name('dashboard-transaction-details');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
