@@ -8,8 +8,8 @@
         <div class="row align-items-center justify-content-center row-login">
         <div class="col-lg-4">
             <h2>
-            Memulai untuk jual beli <br />
-            dengan cara terbaru
+            Getting started with buying and selling <br />
+            in the latest way
             </h2>
             <form class="mt-3">
             <div class="form-group">
@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label>Store</label>
-                <p class="text-muted">Apakah anda juga ingin membuka toko?</p>
+                <p class="text-muted">Would you also like to open a store?</p>
                 <div
                 class="custom-control custom-radio custom-control-inline"
                 >
@@ -48,7 +48,7 @@
                     :value="true"
                 />
                 <label for="openStoreTrue" class="custom-control-label">
-                    Iya,boleh
+                    Yes
                 </label>
                 </div>
                 <div
@@ -63,16 +63,16 @@
                     :value="false"
                 />
                 <label for="openStoreFalse" class="custom-control-label">
-                    Enggak, makasih
+                    No
                 </label>
                 </div>
             </div>
             <div class="form-group" v-if="is_store_open">
-                <label>Nama Toko</label>
+                <label>Store Name</label>
                 <input type="text" class="form-control" />
             </div>
             <div class="form-group" v-if="is_store_open">
-                <label>Kategori</label>
+                <label>Category</label>
                 <select name="category" class="form-control">
                 <option value="" disabled>Select Category</option>
                 </select>

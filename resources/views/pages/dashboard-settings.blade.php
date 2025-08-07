@@ -23,13 +23,13 @@ data-aos="fade-up"
                 <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                    <label>Nama Toko</label>
+                    <label>Store Name</label>
                     <input type="text" class="form-control" />
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                    <label>Kategori</label>
+                    <label>Category</label>
                     <select name="category" class="form-control">
                         <option value="" disabled>
                         Select Category
@@ -41,7 +41,7 @@ data-aos="fade-up"
                     <div class="form-group">
                     <label>Store Status</label>
                     <p class="text-muted">
-                        Apakah saat ini toko Anda buka?
+                        Is your store currently open?
                     </p>
                     <div
                         class="custom-control custom-radio custom-control-inline"
@@ -57,7 +57,7 @@ data-aos="fade-up"
                         for="openStoreTrue"
                         class="custom-control-label"
                         >
-                        Buka
+                        Open
                         </label>
                     </div>
                     <div
@@ -74,7 +74,7 @@ data-aos="fade-up"
                         for="openStoreFalse"
                         class="custom-control-label"
                         >
-                        Sementara Tutup
+                        Temporarily Closed
                         </label>
                     </div>
                     </div>

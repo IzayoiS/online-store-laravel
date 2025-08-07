@@ -15,8 +15,8 @@
             </div>
             <div class="col-lg-5">
               <h2>
-                Belanja kebutuhan utama,<br />
-                menjadi lebih mudah
+                Shopping for essentials,<br />
+                has become easier
               </h2>
               <form action="" class="mt-3">
                 <div class="form-group">
