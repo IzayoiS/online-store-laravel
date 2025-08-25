@@ -33,6 +33,11 @@ Route::get('/dashboard/transactions/{id}', [DashboardTransactionController::clas
 Route::get('/dashboard/settings', [DashboardSettingController::class, 'store'])->name('dashboard-settings-store');
 Route::get('/dashboard/account', [DashboardSettingController::class, 'account'])->name('dashboard-settings-account');
 
+// ->middleware(['auth',admin])
+Route::prefix('admin')->namespace('Admin')->group(function() {
+    Route::get('/',[DashboardController::class, 'index'])->name('admin-dashboard');
+});
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');

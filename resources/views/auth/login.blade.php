@@ -28,13 +28,13 @@
                   <input type="password" class="form-control w-75" />
                 </div>
                 <a
-                  href="/dashboard.html"
+                  href="{{ route("dashboard") }}"
                   class="btn btn-success btn-block w-75 mt-4"
                 >
                   Sign In to My Account
                 </a>
                 <a
-                  href="/register.html"
+                  href="{{ route("register") }}"
                   class="btn btn-signup btn-block w-75 mt-4"
                 >
                   Sign Up

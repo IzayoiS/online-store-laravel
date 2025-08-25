@@ -27,37 +27,43 @@
           </div>
           <div class="list-group list-group-flush">
             <a
-              href="{{ route('dashboard') }}"
+              href="/dashboard.html"
               class="list-group-item list-group-item-action"
             >
               Dashboard
             </a>
             <a
-              href="{{ route('dashboard-product') }}"
+              href="/dashboard-products.html"
               class="list-group-item list-group-item-action"
             >
-              My Products
+              Products
             </a>
             <a
-              href="{{ route('dashboard-transaction') }}"
+              href="/dashboard-transactions.html"
               class="list-group-item list-group-item-action"
             >
               Transactions
             </a>
             <a
-              href="{{ route('dashboard-settings-store') }}"
+              href="/dashboard-transactions.html"
+              class="list-group-item list-group-item-action"
+            >
+              Categories
+            </a>
+            <a
+              href="/dashboard-settings.html"
               class="list-group-item list-group-item-action"
             >
               Store Settings
             </a>
             <a
-              href="{{ route("dashboard-settings-account") }}"
+              href="/dashboard-account.html"
               class="list-group-item list-group-item-action"
             >
               My Account
             </a>
             <a
-              href="{{ route("home") }}"
+              href="/index.html"
               class="list-group-item list-group-item-action"
             >
               Sign Out
@@ -104,14 +110,14 @@
                       Hi, Iqbal
                     </a>
                     <div class="dropdown-menu">
-                      <a href="{{ route("dashboard") }}" class="dropdown-item"
+                      <a href="/dashboard.html" class="dropdown-item"
                         >Dashboard</a
                       >
-                      <a href="{{ route("dashboard-settings-account") }}" class="dropdown-item"
+                      <a href="/dashboard-account.html" class="dropdown-item"
                         >Settings</a
                       >
                       <div class="dropdown-divider"></div>
-                      <a href="{{ route("home") }}" class="dropdown-item">Logout</a>
+                      <a href="/" class="dropdown-item">Logout</a>
                     </div>
                   </li>
                   <li class="nav-item">

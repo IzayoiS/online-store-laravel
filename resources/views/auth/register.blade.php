@@ -78,12 +78,12 @@
                 </select>
             </div>
             <a
-                href="/dashboard.html"
+                href="{{ route("dashboard") }}"
                 class="btn btn-success btn-block mt-4"
             >
                 Sign Up Now
             </a>
-            <a href="/login.html" class="btn btn-signup btn-block mt-4">
+            <a href="{{ route("login") }}" class="btn btn-signup btn-block mt-4">
                 Back to Sign In
             </a>
             </form>
