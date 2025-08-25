@@ -11,7 +11,8 @@ use App\Http\Controllers\DetailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use \App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use \App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
@@ -34,8 +35,9 @@ Route::get('/dashboard/settings', [DashboardSettingController::class, 'store'])-
 Route::get('/dashboard/account', [DashboardSettingController::class, 'account'])->name('dashboard-settings-account');
 
 // ->middleware(['auth',admin])
-Route::prefix('admin')->namespace('Admin')->group(function() {
-    Route::get('/',[\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin-dashboard');
+Route::prefix('admin')->group(function() {
+    Route::get('/',[AdminDashboardController::class, 'index'])->name('admin-dashboard');
+    Route::resource('category', AdminCategoryController::class);
 });
 
 // Route::get('/dashboard', function () {
