@@ -23,7 +23,7 @@
         <!-- Sidebar -->
         <div class="border-right" id="sidebar-wrapper">
           <div class="sidebar-heading text-center">
-            <img src="/images/dashboard-store-logo.svg" alt="" class="my-4" />
+            <img src="/images/admin.png" alt="" class="my-4" style="max-width: 150px" />
           </div>
           <div class="list-group list-group-flush">
             <a
@@ -33,34 +33,28 @@
               Dashboard
             </a>
             <a
-              href="/dashboard-products.html"
+              href="#"
               class="list-group-item list-group-item-action"
             >
               Products
             </a>
             <a
-              href="/dashboard-transactions.html"
-              class="list-group-item list-group-item-action"
-            >
-              Transactions
-            </a>
-            <a
-              href="/dashboard-transactions.html"
+              href="#"
               class="list-group-item list-group-item-action"
             >
               Categories
             </a>
             <a
-              href="/dashboard-settings.html"
+              href="#"
               class="list-group-item list-group-item-action"
             >
-              Store Settings
+              Transactions
             </a>
             <a
-              href="/dashboard-account.html"
+              href="#"
               class="list-group-item list-group-item-action"
             >
-              My Account
+              Users
             </a>
             <a
               href="/index.html"
@@ -110,21 +104,8 @@
                       Hi, Iqbal
                     </a>
                     <div class="dropdown-menu">
-                      <a href="/dashboard.html" class="dropdown-item"
-                        >Dashboard</a
-                      >
-                      <a href="/dashboard-account.html" class="dropdown-item"
-                        >Settings</a
-                      >
-                      <div class="dropdown-divider"></div>
-                      <a href="/" class="dropdown-item">Logout</a>
+                      <a href="{{ route("home") }}" class="dropdown-item">Logout</a>
                     </div>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link d-inline-block mt-2">
-                      <img src="/images/icon-cart-filled.svg" alt="" />
-                      <div class="card-badge">3</div>
-                    </a>
                   </li>
                 </ul>
 
