@@ -3,9 +3,8 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UserRequest extends FormRequest
+class ProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,13 +22,11 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'name' => 'required|string|max:255',
-        'email' => [
-            'required',
-            'email',
-            Rule::unique('users', 'email')->ignore($this->user),
-        ],
-        'roles' => 'nullable|string|in:ADMIN,USER'
+            'name' => 'required|max:255',
+            'users_id' => 'required|exists:users,id',
+            'categories_id' => 'required|exits:categories,id',
+            'price' => 'required|integer',
+            'description' => 'required|'
         ];
     }
 }
