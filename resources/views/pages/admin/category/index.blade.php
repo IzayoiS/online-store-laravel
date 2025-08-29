@@ -55,7 +55,7 @@
                 url: '{!! url()->current() !!}',
             },
             columns: [
-                { data: 'id', name: 'id' },
+                { data: 'id', name: 'id', className: 'dt-head-left dt-body-left' },
                 { data: 'name', name: 'name' },
                 { data: 'photo',name: 'photo',},
                 { data: 'slug', name: 'slug' },
