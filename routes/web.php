@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CartController;
@@ -40,6 +41,7 @@ Route::prefix('admin')->group(function() {
     Route::get('/',[AdminDashboardController::class, 'index'])->name('admin-dashboard');
     Route::resource('category', AdminCategoryController::class);
     Route::resource('user', UserController::class);
+    Route::resource('product', ProductController::class);
 });
 
 // Route::get('/dashboard', function () {

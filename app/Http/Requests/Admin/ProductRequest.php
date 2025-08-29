@@ -24,9 +24,18 @@ class ProductRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'users_id' => 'required|exists:users,id',
-            'categories_id' => 'required|exits:categories,id',
+            'categories_id' => 'required|exists:categories,id',
             'price' => 'required|integer',
             'description' => 'required|'
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        if ($this->has('price')) {
+            $this->merge([
+                'price' => (int) str_replace(',', '', $this->price),
+            ]);
+        }
     }
 }
