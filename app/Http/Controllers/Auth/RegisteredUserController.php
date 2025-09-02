@@ -62,4 +62,9 @@ class RegisteredUserController extends Controller
     {
         return view('auth.success');
     }
+
+    public function check(Request $request)
+    {
+        return User::where('email', $request->email)->exists();
+    }
 }
