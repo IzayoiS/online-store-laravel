@@ -23,7 +23,8 @@
                             </div>
                             <div class="form-group">
                                 <label>Email Address</label>
-                                <input v-model="email" id="email"
+                                <input v-model="email" id="email" @change="checkForEmailAvailability()"
+                                    :class="{ 'is_invalid': this.email_unavailable }"
                                     class="form-control @error('email') is-invalid @enderror" type="email" name="email"
                                     value="{{ old('email') }}" required autofocus autocomplete="email" />
                                 @error('email')
@@ -89,7 +90,8 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-success btn-block mt-4">
+                            <button type="submit" class="btn btn-success btn-block mt-4"
+                                :disabled="this.email_unavailable">
                                 Sign Up Now
                             </button>
                             <a href="{{ route('login') }}" class="btn btn-signup btn-block mt-4">
@@ -101,64 +103,12 @@
             </div>
         </div>
     </div>
-
-    {{-- <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
-
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout> --}}
 @endsection
 
 @push('addon-script')
     <script src="vendor/vue/vue.js"></script>
     <script src="https://unpkg.com/vue-toasted"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         Vue.use(Toasted);
         var register = new Vue({
@@ -173,13 +123,48 @@
                 //     }
                 // );
             },
-            data: {
-                name: "Angga Hazza Sett",
-                email: "kamujagoan@bwa.id",
-                password: "",
-                is_store_open: true,
-                store_name: "",
+            methods: {
+                checkForEmailAvailability: function() {
+                    var self = this;
+                    axios
+                        .get('{{ route('api-register-check') }}', {
+                            params: {
+                                email: this.email
+                            }
+                        })
+                        .then(function(response) {
+                            if (response.data == false) {
+                                self.email_unavailable = false;
+                                self.$toasted.show(
+                                    "Your email is available! You may proceed to the next step.", {
+                                        position: "top-center",
+                                        className: "rounded",
+                                        duration: 1000,
+                                    }
+                                );
+                            } else {
+                                self.email_unavailable = true;
+                                self.$toasted.error(
+                                    "Sorry, this email is already registered in our system.", {
+                                        position: "top-center",
+                                        className: "rounded",
+                                        duration: 1000,
+                                    }
+                                );
+                            }
+                            console.log(response);
+                        });
+                }
             },
+            data() {
+                return {
+                    name: "Angga Hazza Sett",
+                    email: "kamujagoan@bwa.id",
+                    is_store_open: true,
+                    store_name: "",
+                    email_unavailable: false,
+                }
+            }
         });
     </script>
 @endpush
