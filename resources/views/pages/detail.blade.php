@@ -13,7 +13,7 @@
                         <nav>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
-                                    <a href="/index.html">Home</a>
+                                    <a href="{{ route('home') }}">Home</a>
                                 </li>
                                 <li class="breadcrumb-item active">Product Details</li>
                             </ol>
@@ -58,7 +58,8 @@
                         </div>
                         <div class="col-lg-2" data-aos="zoom-in">
                             @auth
-                                <form action="#">
+                                <form action="{{ route('detail-add', $product->id) }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <button type="submit" class="btn btn-success px-4 text-white btn-block mb-3">
                                         Add to Cart
