@@ -36,78 +36,39 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <img src="/images/product-cart-1.svg" class="cart-image" alt="" />
-                                    </td>
-                                    <td>
-                                        <div class="product-title">
-                                            Sofa Ternyaman
-                                        </div>
-                                        <div class="product-subtitle">
-                                            by Andi Sukka
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="product-title">
-                                            $29,112
-                                        </div>
-                                        <div class="product-subtitle">
-                                            USD
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-remove-cart">Remove</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="/images/product-cart-2.svg" class="cart-image" alt="" />
-                                    </td>
-                                    <td>
-                                        <div class="product-title">
-                                            Sneaker
-                                        </div>
-                                        <div class="product-subtitle">
-                                            by BuildWith Angga
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="product-title">
-                                            $80,309
-                                        </div>
-                                        <div class="product-subtitle">
-                                            USD
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-remove-cart">Remove</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="/images/product-cart-3.svg" class="cart-image" alt="" />
-                                    </td>
-                                    <td>
-                                        <div class="product-title">
-                                            Coffee Holder
-                                        </div>
-                                        <div class="product-subtitle">
-                                            by Addictex
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="product-title">
-                                            $13,492
-                                        </div>
-                                        <div class="product-subtitle">
-                                            USD
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-remove-cart">Remove</a>
-                                    </td>
-                                </tr>
+                                @foreach ($carts as $cart)
+                                    <tr>
+                                        <td>
+                                            @if ($cart->product->galleries->count())
+                                                <img src="{{ Storage::url($cart->product->galleries->first()->photos) }}"
+                                                    class="cart-image" alt="" />
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <div class="product-title">
+                                                {{ $cart->product->name }}
+                                            </div>
+                                            <div class="product-subtitle">
+                                                by {{ $cart->product->user->name }}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-title">
+                                                {{ $cart->product->price }}
+                                            </div>
+                                            <div class="product-subtitle">
+                                                USD
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('cart-delete', $cart->id) }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit" class="btn btn-remove-cart">Remove</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

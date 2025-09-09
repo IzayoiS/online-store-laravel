@@ -46,7 +46,7 @@
                          </div>
                      </li>
                      <li class="nav-item">
-                         <a href="#" class="nav-link d-inline-block mt-2">
+                         <a href="{{ route('cart') }}" class="nav-link d-inline-block mt-2">
                              <img src="/images/icon-cart-empty.svg" alt="" />
                          </a>
                      </li>
@@ -59,7 +59,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="#" class="nav-link d-inline-block">
+                         <a href="{{ route('cart') }}" class="nav-link d-inline-block">
                              Cart
                          </a>
                      </li>
