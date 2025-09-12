@@ -33,7 +33,7 @@ class Product extends Model
     protected function price(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => '$ ' . number_format($value, 0, ',', '.'),
+            get: fn ($value) => '$' . number_format($value, 0, ',', '.'),
             set: fn ($value) => (int) str_replace(['$', ' ', '.', ','], '', $value),
         );
     }
