@@ -11,31 +11,40 @@ class Product extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name', 'users_id', 'categories_id', 'price', 'description', 'slug'
+        'name',
+        'users_id',
+        'categories_id',
+        'price',
+        'description',
+        'slug'
     ];
 
     protected $hidden = [
 
     ];
 
-    public function galleries() 
+    public function galleries()
     {
-        return $this->hasMany(ProductGallery::class,'products_id', 'id');
+        return $this->hasMany(ProductGallery::class, 'products_id', 'id');
     }
-    public function user() 
+    public function user()
     {
-        return $this->hasOne(User::class,'id', 'users_id');
+        return $this->hasOne(User::class, 'id', 'users_id');
     }
-    public function category() 
+    public function category()
     {
-        return $this->belongsTo(Category::class,'categories_id', 'id');
+        return $this->belongsTo(Category::class, 'categories_id', 'id');
     }
-    protected function price(): Attribute
+    // protected function price(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn($value) => '$' . number_format($value, 0, ',', '.'),
+    //         set: fn($value) => (int) str_replace(['$', ' ', '.', ','], '', $value),
+    //     );
+    // }
+    public function getPriceFormattedAttribute()
     {
-        return Attribute::make(
-            get: fn ($value) => '$' . number_format($value, 0, ',', '.'),
-            set: fn ($value) => (int) str_replace(['$', ' ', '.', ','], '', $value),
-        );
+        return '$' . number_format($this->attributes['price'], 0, ',', '.');
     }
 
 }

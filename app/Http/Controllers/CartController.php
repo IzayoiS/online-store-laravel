@@ -8,22 +8,30 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function index() 
+    public function index()
     {
         $carts = Cart::with(['product.galleries', 'user'])->where('users_id', Auth::user()->id)->get();
+
+        $totalPrice = $carts->sum(function ($cart) {
+            return (int) $cart->product->price;
+        });
+
+
         return view('pages.cart', [
-            'carts' => $carts
+            'carts' => $carts,
+            'totalPrice' => $totalPrice
         ]);
     }
 
-    public function delete(Request $request, $id) {
+    public function delete(Request $request, $id)
+    {
         $cart = Cart::findOrFail($id);
         $cart->delete();
 
         return redirect()->route('cart');
     }
-    
-    public function success() 
+
+    public function success()
     {
         return view('pages.success');
     }

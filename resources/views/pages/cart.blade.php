@@ -36,6 +36,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php $totalPrice = 0 @endphp
                                 @foreach ($carts as $cart)
                                     <tr>
                                         <td>
@@ -54,7 +55,7 @@
                                         </td>
                                         <td>
                                             <div class="product-title">
-                                                {{ $cart->product->price }}
+                                                {{ $cart->product->price_formatted }}
                                             </div>
                                             <div class="product-subtitle">
                                                 USD
@@ -68,6 +69,7 @@
                                             </form>
                                         </td>
                                     </tr>
+                                    @php $totalPrice += (int) $cart->product->price; @endphp
                                 @endforeach
                             </tbody>
                         </table>
@@ -157,7 +159,7 @@
                     </div>
                     <div class="col-4 col-md-2">
                         <div class="product-title text-success">
-                            $392.409
+                            ${{ number_format($totalPrice ?? 0) }}
                         </div>
                         <div class="product-subtitle">Total</div>
                     </div>

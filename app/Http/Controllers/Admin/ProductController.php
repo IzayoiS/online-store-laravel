@@ -18,13 +18,15 @@ class ProductController extends Controller
      */
     public function index()
     {
-        if(request()->ajax())
-        {
+        if (request()->ajax()) {
             $query = Product::with(['user', 'category']);
-            
+
             return DataTables::of($query)
-            ->addColumn('action',function($item) {
-                return '
+                ->editColumn('price', function ($item) {
+                    return $item->price_formatted;
+                })
+                ->addColumn('action', function ($item) {
+                    return '
                 <div class="btn-group">
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle mr-1 mb-1" 
@@ -34,11 +36,11 @@ class ProductController extends Controller
                             Action
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="'. route('product.edit', $item->id) .'">
+                            <a class="dropdown-item" href="' . route('product.edit', $item->id) . '">
                                 Edit
                             </a>
-                            <form action="'. route('product.destroy', $item->id) .'" method="POST">
-                                '. method_field('delete') . csrf_field() .'
+                            <form action="' . route('product.destroy', $item->id) . '" method="POST">
+                                ' . method_field('delete') . csrf_field() . '
                                 <button type="submit" class="dropdown-item text-danger">
                                     Delete
                                 </button>
@@ -47,11 +49,11 @@ class ProductController extends Controller
                     </div>
                 </div>
                 ';
-            })
-            ->rawColumns(['action'])
-            ->make();
+                })
+                ->rawColumns(['action'])
+                ->make();
         }
-        
+
         return view('pages.admin.product.index');
     }
 
@@ -75,7 +77,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $data = $request->validated();
-        
+
         $data['slug'] = Str::slug($request->name);
 
         Product::create($data);
