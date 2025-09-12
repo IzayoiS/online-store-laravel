@@ -54,7 +54,7 @@
                         <div class="col-lg-8">
                             <h1>{{ $product->name }}</h1>
                             <div class="owner">By {{ $product->user->store_name }}</div>
-                            <div class="price">{{ $product->price }}</div>
+                            <div class="price">{{ $product->price_formatted }}</div>
                         </div>
                         <div class="col-lg-2" data-aos="zoom-in">
                             @auth
