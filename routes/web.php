@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardProductController;
 use App\Http\Controllers\DashboardSettingController;
@@ -26,12 +27,14 @@ Route::post('/details/{id}', [DetailController::class, 'add'])->name('detail-add
 Route::get('/register/success', [RegisteredUserController::class, 'success'])->name('register-success');
 
 // Authenticated User Routes
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth'])->group(function () {
     // Cart Routes
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
     Route::delete('/cart/{id}', [CartController::class, 'delete'])->name('cart-delete');
+    Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout');
+    Route::post('/checkout/callback', [CheckoutController::class, 'callback'])->name('midtrans-callback');
     Route::get('/success', [CartController::class, 'success'])->name('success');
-    
+
     // Dashboard Routes
     Route::get('/dashboard', action: [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/products', [DashboardProductController::class, 'index'])->name('dashboard-product');
@@ -40,23 +43,19 @@ Route::middleware(['auth'])->group(function() {
 
     Route::get('/dashboard/transactions', [DashboardTransactionController::class, 'index'])->name('dashboard-transaction');
     Route::get('/dashboard/transactions/{id}', [DashboardTransactionController::class, 'details'])->name('dashboard-transaction-details');
-    
+
     Route::get('/dashboard/settings', [DashboardSettingController::class, 'store'])->name('dashboard-settings-store');
     Route::get('/dashboard/account', [DashboardSettingController::class, 'account'])->name('dashboard-settings-account');
 });
 
-// ->middleware(['auth',admin])
-Route::prefix('admin')->group(function() {
-    Route::get('/',[AdminDashboardController::class, 'index'])->name('admin-dashboard');
+// Admin Routes
+Route::prefix('admin')->group(function () {
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('admin-dashboard');
     Route::resource('category', AdminCategoryController::class);
     Route::resource('user', UserController::class);
     Route::resource('product', ProductController::class);
     Route::resource('product-gallery', ProductGalleryController::class);
 });
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -64,4 +63,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
