@@ -9,7 +9,7 @@ class Transaction extends Model
     protected $fillable = [
         'users_id',
         'insurance_price',
-        'shipping_id',
+        'shipping_price',
         'total_price',
         'code',
     ];
