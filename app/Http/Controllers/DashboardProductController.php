@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Admin\ProductRequest;
 use App\Models\Category;
+use App\Models\ProductGallery;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class DashboardProductController extends Controller
 {
@@ -26,5 +29,19 @@ class DashboardProductController extends Controller
         return view('pages.dashboard-products-create', [
             'categories' => $categories
         ]);
+    }
+
+    public function store(ProductRequest $request)
+    {
+        $data = $request->validated();
+        $data['slug'] = Str::slug($request->name);
+        $product = Product::create($data);
+        $gallery = [
+            'products_id' => $product->id,
+            'photos' => $request->file('photo')->store('assets/product', 'public')
+        ];
+        ProductGallery::create($gallery);
+
+        return redirect()->route('dashboard-product');
     }
 }

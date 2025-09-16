@@ -14,7 +14,7 @@
             <div class="dashboard-content">
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('dashboard-settings-store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('dashboard-product-store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="users_id" value="{{ Auth::user()->id }}" />
                             <div class="card">
@@ -29,7 +29,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Price</label>
-                                                <input type="number" class="form-control" name="price" />
+                                                <input type="text" id="price" class="form-control" name="price" />
                                             </div>
                                         </div>
 
@@ -81,5 +81,12 @@
         function thisFileUpload() {
             document.getElementById("file").click();
         }
+        const priceInput = document.getElementById('price');
+
+        priceInput.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+
+            this.value = new Intl.NumberFormat().format(value);
+        });
     </script>
 @endpush
